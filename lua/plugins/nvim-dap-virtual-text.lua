@@ -4,6 +4,7 @@ return {
   'theHamsta/nvim-dap-virtual-text',
   lazy = true,
   opts = {
+        enabled = false,
     -- Display debug text as a comment
     commented = true,
     -- Customize virtual text
