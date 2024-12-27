@@ -34,7 +34,6 @@ return {
                 "lemminx",
                 "marksman",
                 "quick_lint_js",
-                "tsserver",
                 "eslint",
                 -- "yamlls", 
                 "pyright"
