@@ -1,6 +1,0 @@
-# Nvim config files
-
-
-## Plugins:
-
-
