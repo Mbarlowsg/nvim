@@ -22,7 +22,7 @@ opt.ignorecase = true
 opt.smartcase = true
 
 -- Cursor Line
-opt.cusrosline = true -- highlight the line that the cursor is on
+opt.cusrsorline = true -- highlight the line that the cursor is on
 
 -- Appearance
 opt.termguicolors = true
