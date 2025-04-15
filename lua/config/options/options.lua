@@ -36,7 +36,7 @@ opt.clipboard:append("unnamedplus") -- for linux xclip also needs to be installe
 
 -- Split Windows
 opt.splitright = true
-opt.splitleft = true
+opt.splitbelow = true
 
 -- Add keywords for navigation and auto-complete
 opt.iskeyword:append("-")
