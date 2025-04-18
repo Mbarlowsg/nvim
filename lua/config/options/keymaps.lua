@@ -8,6 +8,7 @@ local keymap = vim.keymap
 keymap.set("i", "jk", "<ESC>") -- exit insert mode
 keymap.set("n", "<leader>wq", ":wq<CR>") -- save and quit
 keymap.set("n", "<leader>qq", ":q!<CR>") -- quit without saving
+keymap.set("n", "<leader>qa", ":qa<CR>") -- quit all
 keymap.set("n", "<leader>ww", ":w<CR>") -- save
 keymap.set("n", "<leader>wa", ":wa<CR>") -- save all
 keymap.set("v", "<M-j>", ":m '>+1<CR>gv=gv") -- move line down in visual mode by holding alt
