@@ -29,6 +29,10 @@ keymap.set("n", "<leader>tc", ":tabclose<CR>") -- close a tab
 keymap.set("n", "<leader>tn", ":tabn<CR>") -- next tab
 keymap.set("n", "<leader>tp", ":tabp<CR>") -- previous tab
 
+-- Nvim-tree
+keymap.set("n", "<C-b>", ":NvimTreeToggle<CR>") -- toggle file explorer
+keymap.set("n", "<leader>er", ":NvimTreeFocus<CR>") -- toggle focus to file explorer
+keymap.set("n", "<leader>ef", ":NvimTreeFindFile<CR>") -- find file in file explorer
 
 
 
