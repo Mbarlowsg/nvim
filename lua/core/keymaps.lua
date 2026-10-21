@@ -4,8 +4,11 @@ vim.g.mapleader = " "
 local keymap = vim.keymap
 
 -- General keymaps
-keymap.set("i", "jk", "<ESC>") -- exit insert mode with jk 
+keymap.set("i", "jk", "<ESC>") -- exit insert mode with jk
 keymap.set("i", "ii", "<ESC>") -- exit insert mode with ii
+keymap.set("i", "<C-Del>", "<C-o>dw") -- delete word forward, mirrors <C-w>'s backward delete
+keymap.set("i", "<M-d>", "<C-o>dw") -- delete word forward, WezTerm sends this for Ctrl+Delete
+keymap.set("i", "<C-H>", "<C-w>") -- Ctrl+Backspace sends ^H, which insert mode otherwise treats as plain <BS>
 keymap.set("n", "<leader>wq", ":wq<CR>") -- save and quit
 keymap.set("n", "<leader>qq", ":q!<CR>") -- quit without saving
 keymap.set("n", "<leader>ww", ":w<CR>") -- save
@@ -22,7 +25,7 @@ keymap.set("n", "<leader>sx", ":close<CR>") -- close split window
 keymap.set("n", "<leader>sj", "<C-w>-") -- make split window height shorter
 keymap.set("n", "<leader>sk", "<C-w>+") -- make split windows height taller
 keymap.set("n", "<leader>sl", "<C-w>>5") -- make split windows width bigger 
-keymap.set("n", "<leader>sh", "<C-w><5") -- make split windows width smaller
+keymap.set("n", "<leader>sn", "<C-w><5") -- make split windows width smaller
 
 -- Tab management
 keymap.set("n", "<leader>to", ":tabnew<CR>") -- open a new tab
@@ -50,13 +53,13 @@ keymap.set("n", "<leader>er", ":NvimTreeFocus<CR>") -- toggle focus to file expl
 keymap.set("n", "<leader>ef", ":NvimTreeFindFile<CR>") -- find file in file explorer
 
 -- Telescope
-keymap.set('n', '<leader>pf', require('telescope.builtin').find_files, {})
-keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, {})
-keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, {})
-keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, {})
-keymap.set('n', '<leader>ff', require('telescope.builtin').current_buffer_fuzzy_find, {})
-keymap.set('n', '<leader>fo', require('telescope.builtin').lsp_document_symbols, {})
-keymap.set('n', '<leader>fi', require('telescope.builtin').lsp_incoming_calls, {})
+keymap.set('n', '<leader>pf', function() require('telescope.builtin').find_files() end)
+keymap.set('n', '<leader>fg', function() require('telescope.builtin').live_grep() end)
+keymap.set('n', '<leader>fb', function() require('telescope.builtin').buffers() end)
+keymap.set('n', '<leader>fh', function() require('telescope.builtin').help_tags() end)
+keymap.set('n', '<leader>ff', function() require('telescope.builtin').current_buffer_fuzzy_find() end)
+keymap.set('n', '<leader>fo', function() require('telescope.builtin').lsp_document_symbols() end)
+keymap.set('n', '<leader>fi', function() require('telescope.builtin').lsp_incoming_calls() end)
 keymap.set('n', '<leader>fm', function() require('telescope.builtin').treesitter({default_text=":method:"}) end)
 
 -- Git-blame
@@ -75,8 +78,15 @@ keymap.set("n", "<leader>h7", function() require("harpoon.ui").nav_file(7) end)
 keymap.set("n", "<leader>h8", function() require("harpoon.ui").nav_file(8) end)
 keymap.set("n", "<leader>h9", function() require("harpoon.ui").nav_file(9) end)
 
+-- Mini.ai (jump to next/previous function start)
+keymap.set('n', ']m', function() require('nvim-treesitter-textobjects.move').goto_next_start('@function.outer') end)
+keymap.set('n', '[m', function() require('nvim-treesitter-textobjects.move').goto_previous_start('@function.outer') end)
+
 -- Vim REST Console
 keymap.set("n", "<leader>xr", ":call VrcQuery()<CR>") -- Run REST query
+
+-- Render-markdown
+keymap.set("n", "<leader>mr", ":MarkdownTableToggleReader<CR>") -- toggle rendered (read-only) markdown view; raw/editable by default
 
 -- LSP
 keymap.set('n', '<leader>gg', '<cmd>lua vim.lsp.buf.hover()<CR>')
@@ -94,7 +104,7 @@ keymap.set('n', '<leader>gl', '<cmd>lua vim.diagnostic.open_float()<CR>')
 keymap.set('n', '<leader>gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
 keymap.set('n', '<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>')
 keymap.set('n', '<leader>tr', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
-keymap.set('i', '<C-Space>', '<cmd>lua vim.lsp.buf.completion()<CR>')
+keymap.set('i', '<C-l>', '<cmd>lua vim.lsp.buf.completion()<CR>') -- moved off <C-Space>, which nvim-cmp claims for its own completion trigger
 
 -- Nvim-dap
 keymap.set("n", "<leader>bb", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")

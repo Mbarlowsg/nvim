@@ -10,7 +10,11 @@ return {
     },
     opts = {
         options = {
-            theme = 'tokyonight', -- lualine theme
+            -- Explicit theme built from the shared palette, not 'auto': a
+            -- function so lualine re-evaluates it on every ColorScheme.
+            theme = function()
+                return require('core.palette').lualine()
+            end,
         },
         sections = {
             lualine_c = {

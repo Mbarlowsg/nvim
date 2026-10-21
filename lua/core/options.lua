@@ -46,8 +46,11 @@ opt.iskeyword:append("-")
 -- Disable the mouse while in nvim
 -- opt.mouse = ""
 
+-- Persistent Undo
+opt.undofile = true
+
 -- Folding
 opt.foldlevel = 20
 opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()" -- Utilize Treesitter folds
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Utilize Treesitter folds (nvim core native, independent of the plugin's branch/API)
 

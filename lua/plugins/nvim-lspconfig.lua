@@ -6,10 +6,10 @@ return {
     event = 'VeryLazy',
     dependencies = {
         -- LSP Management
-        -- https://github.com/williamboman/mason.nvim
-        { 'williamboman/mason.nvim' },
-        -- https://github.com/williamboman/mason-lspconfig.nvim
-        { 'williamboman/mason-lspconfig.nvim' },
+        -- https://github.com/mason-org/mason.nvim
+        { 'mason-org/mason.nvim' },
+        -- https://github.com/mason-org/mason-lspconfig.nvim
+        { 'mason-org/mason-lspconfig.nvim' },
 
         -- Useful status updates for LSP
         -- https://github.com/j-hui/fidget.nvim
@@ -29,35 +29,26 @@ return {
                 "html",
                 "gradle_ls",
                 "lua_ls",
-                -- "intelephense", 
+                -- "intelephense",
                 -- "jsonls",
                 "lemminx",
                 "marksman",
                 "quick_lint_js",
                 "eslint",
-                -- "yamlls", 
+                -- "yamlls",
                 "pyright"
             }
+            -- automatic_enable defaults to true: mason-lspconfig calls vim.lsp.enable()
+            -- for every installed server itself, so no manual setup loop is needed
         })
 
-        local lspconfig = require('lspconfig')
-        local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-        local lsp_attach = function(client, bufnr)
-            -- Create your keybindings here...
-        end
-
-        -- Call setup on each LSP server
-        require('mason-lspconfig').setup_handlers({
-            function(server_name)
-                lspconfig[server_name].setup({
-                    on_attach = lsp_attach,
-                    capabilities = lsp_capabilities,
-                })
-            end
+        -- Applied to every server
+        vim.lsp.config('*', {
+            capabilities = require('cmp_nvim_lsp').default_capabilities(),
         })
 
         -- Lua LSP settings
-        lspconfig.lua_ls.setup {
+        vim.lsp.config('lua_ls', {
             settings = {
                 Lua = {
                     diagnostics = {
@@ -66,18 +57,18 @@ return {
                     },
                 },
             },
-        }
+        })
 
         -- Python LSP Settings
-        lspconfig.pyright.setup {
+        vim.lsp.config('pyright', {
             settings = {
                 python = {
                     analysis = {
-                        extraPaths = {"~/home/michael/.local/lib/python3.10/site-packages"}
+                        extraPaths = {"/home/michael/.local/lib/python3.14/site-packages"}
                     }
                 }
             }
-        } 
+        })
     end
 }
 

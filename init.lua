@@ -25,4 +25,9 @@ require("lazy").setup("plugins", {
 
 -- These modules are not loaded by lazy
 require("core.options")
+
+-- Highlights from the shared colorscheme root, after core.options has set
+-- termguicolors - see docs/colorschemes.md
+require("core.palette").apply()
+
 require("core.keymaps")
